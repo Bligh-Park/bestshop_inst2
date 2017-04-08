@@ -3,7 +3,7 @@ from django.db import models
 
 class Category(models.Model):
     name = models.CharField(max_length=64)
-    parent = models.ForeignKey('self', null=True)
+    parent = models.ForeignKey('self', null=True, blank=True)
     priority = models.IntegerField()
 
     class Meta:
@@ -15,7 +15,7 @@ class Category(models.Model):
 class Product(models.Model):
     name = models.CharField(max_length=64)
     price = models.IntegerField()
-    image = models.ImageField()
+    # image = models.ImageField()
     description = models.TextField()
     inventory_count = models.IntegerField()
     score = models.FloatField()
