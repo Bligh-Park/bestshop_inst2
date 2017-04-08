@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'order',
     'product',
     'review',
-    'user'
+    'user',
+    'etcpage'
 ]
 
 MIDDLEWARE = [
