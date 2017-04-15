@@ -59,4 +59,40 @@ def order_create_order(request):
 
 
 def order_complete(request):
+    import requests
+
+    token_res = requests.post('https://api.iamport.kr/users/getToken', json={
+        'imp_key': '3109517868625088',
+        'imp_secret': 'uxtrqbqkgInN0lhAChY1y9gCe8ZYsUtWrXoR9OcpxzcxVu8xL6zkgPWuYVtqPXmhUK83zkt6UFEPaMnV'
+    })
+
+    access_token = token_res.json()['response']['access_token']
+
+    import re
+    if not re.match(r'^imp_(\d+)$', request.GET.get('imp_uid')):
+        raise Http404
+
+    payment_info = requests.get(
+        url='https://api.iamport.kr/payments/%s' % request.GET.get('imp_uid'),
+        headers={
+            'Authorization': access_token
+        }).json()
+
+    order_id = payment_info['response']['merchant_uid']
+    order = Order.objects.get(id=order_id)
+
+    if not order.tid:
+        order.tid = payment_info['response']['imp_uid']
+        order.save(update_fields=['tid'])
+
+    if order.tid != payment_info['response']['imp_uid']:
+        raise Http404()
+
+    if order.amount != payment_info['response']['amount']:
+        # 사용자가 결제 금액을 조작한 경우
+        raise Http404()
+
+    order.state = Order.DICT_STATE_IAMPORT.get(payment_info['response']['status'])
+    order.save(update_fields=['state'])
+
     return render(request, 'order/complete.html')
