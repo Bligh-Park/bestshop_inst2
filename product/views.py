@@ -1,6 +1,7 @@
+from django.http import Http404
 from django.shortcuts import render
 
-from product.models import Product
+from product.models import Product, Category
 
 
 def product_detail(request, product_id):
@@ -11,4 +12,18 @@ def product_detail(request, product_id):
 
     return render(request, 'product/detail.html', context={
         'product': product
+    })
+
+
+def product_list(request):
+    try:
+        category = Category.objects.get(id=request.GET.get('category_id'))
+    except Category.DoesNotExist:
+        raise Http404()
+
+    return render(request, 'product/list.html', context={
+        'category': category,
+        'products': Product.objects.filter(
+            categories__id__in=[category.id for category in category.all_parent_set]
+        ).distinct()
     })

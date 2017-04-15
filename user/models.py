@@ -18,7 +18,7 @@ class UserInfo(models.Model):
     address_2 = models.CharField(max_length=255)
     point = models.IntegerField()
     level = models.ForeignKey('UserLevel')
-    wishlist = models.ManyToManyField('product.Product')
+    wishlist = models.ManyToManyField('product.Product', blank=True)
 
     class Meta:
         unique_together = (

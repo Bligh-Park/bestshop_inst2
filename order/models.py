@@ -3,10 +3,16 @@ from django.db import models
 # Create your models here.
 from django.db import models
 
+
 class Cart(models.Model):
-    userinfo = models.ForeignKey('user.UserInfo')
+    userinfo = models.ForeignKey('user.UserInfo', related_name='cart')
     product = models.ForeignKey('product.Product')
     count = models.IntegerField()
+
+    class Meta:
+        unique_together = (
+            ('userinfo', 'product'),
+        )
 
 
 class Order(models.Model):
