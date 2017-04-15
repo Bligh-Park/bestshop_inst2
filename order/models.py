@@ -21,12 +21,17 @@ class Order(models.Model):
     delivery_fee = models.IntegerField()
     point = models.IntegerField()
     amount = models.IntegerField()
-    tid = models.CharField(max_length=128)
-    state = models.IntegerField()
+    tid = models.CharField(max_length=128, null=True)
+    state = models.IntegerField(default=1)
     postcode = models.CharField(max_length=5)
     address_1 = models.CharField(max_length=128)
     address_2 = models.CharField(max_length=128)
     name = models.CharField(max_length=64)
+
+    @property
+    def subject(self):
+        return self.orderproductitem_set.first().product.name# + (' 외 %d건')
+
 
 class OrderProductItem(models.Model):
     order = models.ForeignKey('Order')

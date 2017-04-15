@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 {% block container %}
-<form action="{% url 'order_oder' %}" method="POST">
+<form action="{% url 'order_order' %}" method="POST">
     {% csrf_token %}
     <h1>장바구니</h1>
     <table>
