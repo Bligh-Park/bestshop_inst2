@@ -60,10 +60,11 @@ def order_create_order(request):
 
 def order_complete(request):
     import requests
+    from django.conf import settings
 
     token_res = requests.post('https://api.iamport.kr/users/getToken', json={
-        'imp_key': '3109517868625088',
-        'imp_secret': 'uxtrqbqkgInN0lhAChY1y9gCe8ZYsUtWrXoR9OcpxzcxVu8xL6zkgPWuYVtqPXmhUK83zkt6UFEPaMnV'
+        'imp_key': settings.IMP_KEY,
+        'imp_secret': settings.IMP_SECRET
     })
 
     access_token = token_res.json()['response']['access_token']

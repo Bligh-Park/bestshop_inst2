@@ -138,3 +138,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+
+IMP_KEY = '3109517868625088'
+IMP_SECRET = 'uxtrqbqkgInN0lhAChY1y9gCe8ZYsUtWrXoR9OcpxzcxVu8xL6zkgPWuYVtqPXmhUK83zkt6UFEPaMnV'
