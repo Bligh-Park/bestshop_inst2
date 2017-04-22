@@ -5,3 +5,4 @@ django-summernote
 Pillow
 raven
 boto3
+django-storages

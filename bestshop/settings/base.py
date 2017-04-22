@@ -146,3 +146,11 @@ IMP_SECRET = 'uxtrqbqkgInN0lhAChY1y9gCe8ZYsUtWrXoR9OcpxzcxVu8xL6zkgPWuYVtqPXmhUK
 
 AWS_ACCESS_KEY_ID = 'AKIAIOBFQOOD3NG3RVWA'
 AWS_SECRET_ACCESS_KEY = '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'
+
+
+DEFAULT_FILE_STORAGE='storages.backends.s3boto3.S3Boto3Storage'
+AWS_REGION = 'ap-northeast-2'
+AWS_S3_SIGNATURE_VERSION = 's3v4'
+AWS_STORAGE_BUCKET_NAME = 'test14.elab.kr'
+AWS_S3_CUSTOM_DOMAIN = 'http://test14.elab.kr.s3-website.ap-northeast-2.amazonaws.com'
+
