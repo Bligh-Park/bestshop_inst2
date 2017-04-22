@@ -5,6 +5,13 @@ from product.models import Product, Category
 
 
 def product_detail(request, product_id):
+
+    from django.core.mail import send_mail
+    send_mail(subject='test', message='This is AWS test mail.', from_email='sy131.park@gmail.com',
+              recipient_list=[
+                  'sy131.park@gmail.com'
+              ])
+
     try:
         product = Product.objects.get(id=product_id)
     except Product.DoesNotExist:
