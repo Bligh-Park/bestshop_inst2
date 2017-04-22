@@ -6,6 +6,18 @@ from product.models import Product, Category
 
 def product_detail(request, product_id):
 
+    from django.conf import settings
+    import boto3
+    client = boto3.client('sns',
+                          aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
+                          aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY,
+                          region_name='ap-northeast-1')
+
+    client.publish(
+        PhoneNumber='+821099799082',
+        Message='test',
+    )
+
     from django.core.mail import send_mail
     send_mail(subject='test', message='This is AWS test mail.', from_email='sy131.park@gmail.com',
               recipient_list=[

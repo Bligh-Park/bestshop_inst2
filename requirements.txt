@@ -4,3 +4,4 @@ django-allauth
 django-summernote
 Pillow
 raven
+boto3
