@@ -15,6 +15,12 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from rest_framework import routers
+
+from product.viewsets import ProductViewSet
+
+router = routers.DefaultRouter(trailing_slash=False)
+router.register('api/product', ProductViewSet)
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -23,5 +29,6 @@ urlpatterns = [
     url(r'^order/', include('order.urls')),
     url(r'^accounts/', include('allauth.urls')),
     url(r'^summernote/', include('django_summernote.urls')),
+    url(r'^api/', include(router.urls, namespace='api')),
     url(r'^', include('etcpage.urls')),
 ]

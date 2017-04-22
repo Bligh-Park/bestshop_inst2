@@ -6,3 +6,7 @@ Pillow
 raven
 boto3
 django-storages
+djangorestframework
+django-filter
+psycopg2
+
